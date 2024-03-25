@@ -404,7 +404,7 @@ class HomepagePageState extends State<HomepagePage> {
     return Align(
       alignment: Alignment.centerRight,
       child: SizedBox(
-        height: 132.v,
+        height: 131.v,
         child: Consumer<HomepageProvider>(
           builder: (context, provider, child) {
             return ListView.separated(
