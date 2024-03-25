@@ -4,6 +4,7 @@ import 'package:joybox/presentation/Fast%20food/inner_fast_food_res_screen/inner
 import 'package:joybox/presentation/homepage_page/widgets/divider_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:joybox/presentation/homepage_page/widgets/joybox_choice_item_widget.dart';
+import '../cart_screen/cart_screen.dart';
 import '../fast_food_restaurant_screen/fast_food_restaurant_screen.dart';
 import 'widgets/Appbar_home_widget.dart';
 import 'widgets/Menu widgets/menu_tab_widget.dart';
@@ -31,6 +32,7 @@ class HomepagePage extends StatefulWidget {
 
   @override
   HomepagePageState createState() => HomepagePageState();
+
   static Widget builder(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => HomepageProvider(),
@@ -151,7 +153,7 @@ class HomepagePageState extends State<HomepagePage> {
                     width: 86.h,
                     child: Divider(),
                   ),
-                  
+
                   // SizedBox(height: 41.v),
                   BuildChoiceImages(context),
                   SizedBox(height: 42.v),
@@ -171,18 +173,21 @@ class HomepagePageState extends State<HomepagePage> {
                       ),
                     ),
                   ),
-                //   SizedBox(height: 39.v),
-                //  // _buildFortySeven(context),
-                //  _buildSeventyFive(context),
+                  //   SizedBox(height: 39.v),
+                  //  // _buildFortySeven(context),
+                  //  _buildSeventyFive(context),
                   SizedBox(height: 25.v),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Your Favourite meal",style: TextStyle(fontSize: 18.h,fontWeight: FontWeight.bold),),
-                        Text("View All"), 
-                    
+                        Text(
+                          "Your Favourite meal",
+                          style: TextStyle(
+                              fontSize: 18.h, fontWeight: FontWeight.bold),
+                        ),
+                        Text("View All"),
                       ],
                     ),
                   ),
@@ -197,7 +202,7 @@ class HomepagePageState extends State<HomepagePage> {
   }
 
   /// Section Widget
-  
+
   /// Section Widget
   Widget _buildrestaurantsWidget(BuildContext context) {
     return SingleChildScrollView(
@@ -369,20 +374,31 @@ class HomepagePageState extends State<HomepagePage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               GestureDetector(
-                                onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => FastFoodRestaurantScreen(),)),
+                                onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          FastFoodRestaurantScreen(),
+                                    )),
                                 child: Text(
                                   "lbl_fast_food".tr,
                                   style: CustomTextStyles.titleSmallGray100,
                                 ),
                               ),
-                              menutabwidget(tabname: 'Pakistani Food'),
+                              InkWell(
+                                onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          CartScreen(),
+                                    )),
+                                child: menutabwidget(tabname: 'Pakistani Food'),
+                              ),
                               menutabwidget(tabname: 'Chinese'),
                               menutabwidget(tabname: 'Italian'),
                               menutabwidget(tabname: 'Thai Food'),
                               menutabwidget(tabname: 'Turkish'),
                               menutabwidget(tabname: 'Afghani'),
-                              
-                              
                             ],
                           ),
                         ),
@@ -418,10 +434,11 @@ class HomepagePageState extends State<HomepagePage> {
                   width: 19.h,
                 );
               },
-              itemCount: provider.homepageModelObj.tradtionalRestaurantsItemList.length,
+              itemCount: provider
+                  .homepageModelObj.tradtionalRestaurantsItemList.length,
               itemBuilder: (context, index) {
-                TradtionalRestaurantsItemModel model =
-                    provider.homepageModelObj.tradtionalRestaurantsItemList[index];
+                TradtionalRestaurantsItemModel model = provider
+                    .homepageModelObj.tradtionalRestaurantsItemList[index];
                 return traditional_Item_Widget(
                   model,
                 );
@@ -522,13 +539,15 @@ class HomepagePageState extends State<HomepagePage> {
                 );
               },
             ),
-            SizedBox(height: 30.h,),
-             CustomImageView(
-            imagePath: ImageConstant.imgVectorAmber40051x430,
-            height: 51.v,
-            width: 430.h,
-            alignment: Alignment.bottomCenter,
-          ),
+            SizedBox(
+              height: 30.h,
+            ),
+            CustomImageView(
+              imagePath: ImageConstant.imgVectorAmber40051x430,
+              height: 51.v,
+              width: 430.h,
+              alignment: Alignment.bottomCenter,
+            ),
           ],
         ),
       ),
@@ -613,8 +632,8 @@ class HomepagePageState extends State<HomepagePage> {
                   ),
                   itemCount: provider.homepageModelObj.fortyItemList.length,
                   itemBuilder: (context, index, realIndex) {
-                    print(
-                        provider.homepageModelObj.fortyItemList[index].toString());
+                    print(provider.homepageModelObj.fortyItemList[index]
+                        .toString());
                     OfferItemModel model =
                         provider.homepageModelObj.fortyItemList[index];
                     return BuildOfferWidgetItems(
@@ -628,8 +647,8 @@ class HomepagePageState extends State<HomepagePage> {
         ),
       ),
     );
-  } 
-  
+  }
+
   // /// Section Widget
   Widget _buildFortyTwo(BuildContext context) {
     return SizedBox(
@@ -661,6 +680,4 @@ class HomepagePageState extends State<HomepagePage> {
   }
 
   /// Common widget
-  
 }
-
