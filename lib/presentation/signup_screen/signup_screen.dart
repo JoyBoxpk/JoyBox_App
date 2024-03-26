@@ -1,334 +1,217 @@
-import 'dart:ui';
-
 import 'package:flutter/gestures.dart';
-import 'package:joybox/core/utils/validation_functions.dart';
-import 'package:joybox/widgets/custom_text_form_field.dart';
-import 'package:joybox/widgets/custom_checkbox_button.dart';
-import 'package:joybox/widgets/custom_elevated_button.dart';
-import 'package:joybox/widgets/custom_icon_button.dart';
-import 'models/signup_screen_model.dart';
 import 'package:flutter/material.dart';
 import 'package:joybox/core/app_export.dart';
-import 'provider/signup_screen_provider.dart';
+import 'package:joybox/widgets/common_social_icon_button.dart';
+import '../../widgets/common_elevated_button.dart';
+import '../../widgets/common_text_formfield.dart';
 
-class SignupScreen extends StatefulWidget {
-  const SignupScreen({Key? key})
-      : super(
-          key: key,
-        );
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({Key? key}) : super(key: key);
+
+  static const String routeName = 'signup';
 
   @override
-  SignupScreenState createState() => SignupScreenState();
-  static Widget builder(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => SignupScreenProvider(),
-      child: SignupScreen(),
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  late double screenWidth;
+  late double screenHeight;
+
+  @override
+  Widget build(BuildContext context) {
+    screenWidth = MediaQuery.of(context).size.width;
+    screenHeight = MediaQuery.of(context).size.height;
+
+    return SafeArea(
+      child: Scaffold(
+        body: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Positioned(
+              right: 0,
+              bottom: -60,
+              child: Image.asset("assets/images/img2_login_screen.png"),
+            ),
+            Container(
+              alignment: Alignment.bottomCenter,
+              padding: EdgeInsets.symmetric(
+                  horizontal: screenWidth * 0.050,
+                  vertical: screenHeight * 0.030),
+              height: screenHeight * 0.890,
+              margin: EdgeInsets.only(
+                  left: screenWidth * 0.040, right: screenWidth * 0.040),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Color(0xFF2099AA),
+                    Colors.white,
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(25.0),
+                  bottomLeft: Radius.circular(25.0),
+                ),
+              ),
+              child: _LoginForm(
+                  screenWidth: screenWidth, screenHeight: screenHeight),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
 
-class SignupScreenState extends State<SignupScreen> {
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+class _LoginForm extends StatelessWidget {
+  final double screenWidth;
+  final double screenHeight;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  @override
-  void initState() {
-    super.initState();
-  }
+  _LoginForm({required this.screenWidth, required this.screenHeight});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Form(
-        key: _formKey,
-        child: SafeArea(
-          child: SizedBox(
-            width: double.maxFinite,
-            child: SizedBox(
-              height: SizeUtils.height,
-              width: double.maxFinite,
-              child: Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  CustomImageView(
-                    imagePath: ImageConstant.imgRectangle4490852x393,
-                    height: 852.v,
-                    width: 393.h,
-                    alignment: Alignment.center,
-                  ),
-            
-                  CustomImageView(
-                    imagePath: ImageConstant.imgGroup,
-                    height: 364.v,
-                    width: 344.h,
-                    alignment: Alignment.bottomRight,
-                  ),
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 19.h),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 21.h,
-                        vertical: 20.v,
-                      ),
-                                         decoration: AppDecoration.gradientWhiteAToAmberAWithBlur(context),
-            
-                        //borderRadius: BorderRadiusStyle.roundedBorder27,
-                      
-                      child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0), // Adjust the blur intensity
-
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SizedBox(height: 105.v),
-                            Text(
-                              "lbl_signup2".tr,
-                              style: theme.textTheme.displayMedium,
-                            ),
-                            SizedBox(height: 23.v),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                "lbl_email".tr,
-                                style: theme.textTheme.bodyMedium,
-                              ),
-                            ),
-                            SizedBox(height: 6.v),
-                            _buildEmail(context),
-                            SizedBox(height: 19.v),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Padding(
-                                padding: EdgeInsets.only(left: 8.h),
-                                child: Text(
-                                  "lbl_password".tr,
-                                  style: theme.textTheme.bodyMedium,
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 6.v),
-                            _buildPassword(context),
-                            SizedBox(height: 23.v),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                "msg_confirm_password".tr,
-                                style: CustomTextStyles.bodyMedium14,
-                              ),
-                            ),
-                            SizedBox(height: 4.v),
-                            _buildConfirmpassword(context),
-                            SizedBox(height: 22.v),
-                            _buildIacceptthetermsandprivacypolic(context),
-                            SizedBox(height: 22.v),
-                            _buildSignUp(context),
-                            SizedBox(height: 31.v),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                CustomIconButton(
-                                  height: 40, // Increase the height
-                                  width: 40,  // Increase the width
-                                  padding: EdgeInsets.all(13.h),
-                                  child: CustomImageView(
-                                    imagePath: ImageConstant.imgSocialIconFacebook,
-                                    color: Colors.black,
-                                    fit: BoxFit.contain,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 10.h),
-                                  child: CustomIconButton(
-                                    height: 40, // Increase the height
-                                    width: 40,  // Increase the width
-                                    padding: EdgeInsets.all(13.h),
-                                    child: CustomImageView(
-                                      imagePath: ImageConstant.imgContrast,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 5.h),
-                                  child: CustomIconButton(
-                                    height: 40, // Increase the height
-                                    width: 40,  // Increase the width
-                                    padding: EdgeInsets.all(13.h),
-                                    child: CustomImageView(
-                                      imagePath: ImageConstant.imgSocialIconApple,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                                    
-                            SizedBox(height: 30.v),
-                            RichText(
-  text: TextSpan(
-    children: [
-      TextSpan(
-        text: "msg_already_have_an2".tr,
-        style: CustomTextStyles.bodyMediumb2000000,
-      ),
-      TextSpan(
-        text: " ",
-      ),
-      TextSpan(
-        text: "lbl_log_in2".tr,
-        style: theme.textTheme.titleSmall?.copyWith(
-          decoration: TextDecoration.underline, // Add underline style to the text
-        ),
-        recognizer: TapGestureRecognizer()
-          ..onTap = () {
-            Navigator.pushNamed(context, AppRoutes.loginScreen);
-          },
-      ),
-    ],
-  ),
-  textAlign: TextAlign.left,
-),
-
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+    return Form(
+      key: _formKey,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            "SignUp",
+            style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: Colors.white, fontWeight: FontWeight.w600),
+          ),
+          SizedBox(height: screenHeight * 0.040),
+          _buildFieldText("Email"),
+          SizedBox(height: screenHeight * 0.005),
+          CommonTextFormField(
+            hintText: "Email address",
+            suffixIcon: Icon(
+              Icons.check_circle,
+              color: Colors.red,
+              size: 20.0,
+            ),
+          ),
+          SizedBox(height: screenHeight * 0.020),
+          _buildFieldText("Password"),
+          SizedBox(height: screenHeight * 0.005),
+          CommonTextFormField(
+            hintText: "Password",
+            isPassword: true,
+            suffixIcon: IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.visibility_off_outlined,
+                size: 20.0,
               ),
             ),
           ),
+          SizedBox(height: screenHeight * 0.020),
+          _buildFieldText("Confirm Password"),
+          SizedBox(height: screenHeight * 0.005),
+          CommonTextFormField(
+            hintText: "Password",
+            isPassword: true,
+            suffixIcon: IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.visibility_outlined,
+                size: 20.0,
+              ),
+            ),
+          ),
+          SizedBox(height: screenHeight * 0.016),
+          Row(
+            children: [
+              Container(
+                width: screenWidth * 0.036,
+                height: screenHeight * 0.020,
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                ),
+                child: Icon(Icons.check, color: Colors.white, size: 14.0),
+              ),
+              SizedBox(width: screenWidth * 0.020),
+              Text(
+                "I accept the terms and policy".tr,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 12.0,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: screenHeight * 0.025),
+          CommonElevatedButton(
+            onPressed: () {},
+            label: "Signup",
+          ),
+          SizedBox(height: screenHeight * 0.025),
+          SizedBox(height: screenHeight * 0.030),
+          _SocialRow(),
+          SizedBox(height: screenHeight * 0.040),
+          _buildRichText(context),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFieldText(String text) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Text(
+        text,
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 12.0,
+          fontWeight: FontWeight.w500,
         ),
       ),
     );
   }
 
-  /// Section Widget
-  Widget _buildEmail(BuildContext context) {
-    return Selector<SignupScreenProvider, TextEditingController?>(
-      selector: (
-        context,
-        provider,
-      ) =>
-          provider.emailController,
-      builder: (context, emailController, child) {
-        return CustomTextFormField(
-          controller: emailController,
-          hintText: "lbl_your_email".tr,
-          textInputType: TextInputType.emailAddress,
-          validator: (value) {
-            if (value == null || (!isValidEmail(value, isRequired: true))) {
-              return "err_msg_please_enter_valid_email".tr;
-            }
-            return null;
-          },
-        );
-      },
-    );
-  }
-
-  /// Section Widget
-  Widget _buildPassword(BuildContext context) {
-    return Consumer<SignupScreenProvider>(
-      builder: (context, provider, child) {
-        return CustomTextFormField(
-          controller: provider.passwordController,
-          suffix: InkWell(
-            onTap: () {
-              provider.changePasswordVisibility();
-            },
-            child: Container(
-              margin: EdgeInsets.fromLTRB(30.h, 18.v, 16.h, 18.v),
-              child: CustomImageView(
-                imagePath: ImageConstant.imgIcon,
-                height: 20.adaptSize,
-                width: 20.adaptSize,
-              ),
+  Widget _buildRichText(BuildContext context) {
+    return RichText(
+      text: TextSpan(
+        children: [
+          TextSpan(
+            text: "Already have an account?".tr,
+            style: CustomTextStyles.bodyMediumb2000000,
+          ),
+          TextSpan(
+            text: " ",
+          ),
+          TextSpan(
+            text: "Log in".tr,
+            style: TextStyle(
+              color: Color(0xFF0EE452E),
+              fontSize: 12.0,
             ),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                Navigator.pushNamed(context, AppRoutes.signupscreen);
+              },
           ),
-          suffixConstraints: BoxConstraints(
-            maxHeight: 56.v,
-          ),
-          obscureText: provider.isShowPassword,
-        );
-      },
-    );
-  }
-
-  /// Section Widget
-  Widget _buildConfirmpassword(BuildContext context) {
-    return Consumer<SignupScreenProvider>(
-      builder: (context, provider, child) {
-        return CustomTextFormField(
-          controller: provider.confirmpasswordController,
-          hintText: "lbl_repeat_password".tr,
-          textInputAction: TextInputAction.done,
-          textInputType: TextInputType.visiblePassword,
-          suffix: InkWell(
-            onTap: () {
-              provider.changePasswordVisibility1();
-            },
-            child: Container(
-              margin: EdgeInsets.fromLTRB(30.h, 21.v, 18.h, 22.v),
-              child: CustomImageView(
-                imagePath: ImageConstant.imgEye,
-                height: 13.v,
-                width: 17.h,
-              ),
-            ),
-          ),
-          suffixConstraints: BoxConstraints(
-            maxHeight: 56.v,
-          ),
-          validator: (value) {
-            if (value == null || (!isValidPassword(value, isRequired: true))) {
-              return "err_msg_please_enter_valid_password".tr;
-            }
-            return null;
-          },
-          obscureText: provider.isShowPassword1,
-          contentPadding: EdgeInsets.only(
-            left: 16.h,
-            top: 18.v,
-            bottom: 18.v,
-          ),
-        );
-      },
-    );
-  }
-
-  /// Section Widget
-  Widget _buildIacceptthetermsandprivacypolic(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: 16.h,
-        right: 10.h,
-      ),
-      child: Selector<SignupScreenProvider, bool?>(
-        selector: (
-          context,
-          provider,
-        ) =>
-            provider.iacceptthetermsandprivacypolic,
-        builder: (context, iacceptthetermsandprivacypolic, child) {
-          return CustomCheckboxButton(
-            text: "msg_i_accept_the_terms".tr,
-            value: iacceptthetermsandprivacypolic,
-            onChange: (value) {
-              context.read<SignupScreenProvider>().changeCheckBox1(value);
-            },
-          );
-        },
+        ],
       ),
     );
   }
 
-  /// Section Widget
-  Widget _buildSignUp(BuildContext context) {
-    return CustomElevatedButton(
-      width: 181.h,
-      text: "lbl_sign_up2".tr,
-      buttonStyle: CustomButtonStyles.fillBlack,
-      buttonTextStyle: CustomTextStyles.titleMediumInterWhiteA700,
+  Widget _SocialRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        CommonSocialIconButton(imagePath: ImageConstant.imgSocialIconFacebook),
+        SizedBox(width: screenWidth * 0.018),
+        CommonSocialIconButton(imagePath: ImageConstant.imgContrast),
+        SizedBox(width: screenWidth * 0.018),
+        CommonSocialIconButton(imagePath: ImageConstant.imgSocialIconApple),
+      ],
     );
   }
 }

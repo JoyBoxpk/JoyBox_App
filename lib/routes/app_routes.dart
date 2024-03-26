@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:joybox/presentation/homepage_page/homepage_page.dart';
 import '../presentation/splash_screen/splash_screen.dart';
 import '../presentation/get_started_one_screen/get_started_one_screen.dart';
-import '../presentation/login_screen/login_screen.dart';
-import '../presentation/signup_screen/signup_screen.dart';
 import '../presentation/homepage_container_screen/homepage_container_screen.dart';
 import '../presentation/app_navigation_screen/app_navigation_screen.dart';
 
@@ -27,11 +25,11 @@ class AppRoutes {
   static Map<String, WidgetBuilder> get routes => {
         splashScreen: SplashScreen.builder,
         getStartedOneScreen: GetStartedOneScreen.builder,
-        loginScreen: LoginScreen.builder,
-        signupscreen: SignupScreen.builder,
+        // loginScreen: LoginScreen.builder,
+        // signupscreen: SignupScreen.builder,
         homepageContainerScreen: HomepageContainerScreen.builder,
         homepagePage:HomepagePage.builder,
         appNavigationScreen: AppNavigationScreen.builder,
-        initialRoute: HomepagePage.builder
+        // initialRoute: LoginScreen.builder
       };
 }
