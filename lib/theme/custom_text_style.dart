@@ -134,6 +134,11 @@ class CustomTextStyles {
         fontSize: 19.fSize,
         fontWeight: FontWeight.w600,
       );
+  static get titleMediumSemiBoldRed => theme.textTheme.titleMedium!.copyWith(
+        fontSize: 19.fSize,
+        fontWeight: FontWeight.w600,
+        color: Colors.red
+      );
   static get titleMediumWhiteA700 => theme.textTheme.titleMedium!.copyWith(
         color: appTheme.whiteA700,
         fontWeight: FontWeight.w600,
