@@ -8,7 +8,7 @@ import '../../widgets/common_text_formfield.dart';
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
-  static const String routeName = 'login';
+  static const String routeName = '/login';
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -167,7 +167,7 @@ class _LoginForm extends StatelessWidget {
                 ),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    Navigator.pushNamed(context, AppRoutes.signupscreen);
+                    // Navigator.pushNamed(context, AppRoutes.signupscreen);
                   },
               ),
             ],

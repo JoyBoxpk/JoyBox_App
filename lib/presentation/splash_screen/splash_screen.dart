@@ -1,32 +1,26 @@
-import 'package:flutter/cupertino.dart';
-
-import 'models/splash_model.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:joybox/core/app_export.dart';
-import 'provider/splash_provider.dart';
+import 'package:joybox/presentation/get_started_one_screen/get_started_screen.dart';
+
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
-  @override
-  SplashScreenState createState() => SplashScreenState();
+  static const String routeName = '/';
 
-  static Widget builder(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (context) => SplashProvider(), child: SplashScreen());
-  }
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen> {
   @override
-  // void initState() {
-  //   super.initState();
-  //   Future.delayed(const Duration(milliseconds: 3000), () {
-  //     NavigatorService.popAndPushNamed(
-  //       AppRoutes.getStartedOneScreen,
-  //     );
-  //   });
-  // }
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(milliseconds: 3000), () {
+      context.goNamed(GetStartedScreen.routeName);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

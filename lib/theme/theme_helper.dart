@@ -146,7 +146,7 @@ class TextThemes {
         ),
         labelLarge: TextStyle(
           color: appTheme.black900,
-          fontSize: 12.fSize,
+          fontSize: 15.fSize,
           fontFamily: 'Montserrat',
           fontWeight: FontWeight.w500,
         ),
@@ -158,7 +158,7 @@ class TextThemes {
         ),
         titleLarge: TextStyle(
           color: appTheme.black900,
-          fontSize: 20.fSize,
+          fontSize: 24.fSize,
           fontFamily: 'Montserrat',
           fontWeight: FontWeight.w600,
         ),
@@ -173,6 +173,12 @@ class TextThemes {
           fontSize: 14.fSize,
           fontFamily: 'Montserrat',
           fontWeight: FontWeight.w600,
+        ),
+        displayLarge:  TextStyle(
+          color: Color(0XFFFFD726),
+          fontSize: 80.fSize,
+          fontFamily: 'Montserrat',
+          fontWeight: FontWeight.w700,
         ),
       );
 }

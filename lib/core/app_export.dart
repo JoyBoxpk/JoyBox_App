@@ -8,7 +8,6 @@ export 'package:joybox/core/utils/pref_utils.dart';
 export 'package:joybox/core/utils/size_utils.dart';
 export 'package:joybox/data/models/selectionPopupModel/selection_popup_model.dart';
 export 'package:joybox/localization/app_localization.dart';
-export 'package:joybox/routes/app_routes.dart';
 export 'package:joybox/theme/app_decoration.dart';
 export 'package:joybox/theme/custom_text_style.dart';
 export 'package:joybox/theme/theme_helper.dart';
