@@ -1,13 +1,7 @@
 import 'package:flutter/widgets.dart';
-import 'package:joybox/core/utils/size_utils.dart';
-import 'package:joybox/localization/app_localization.dart';
 
 import '../../../core/app_export.dart';
-import '../../../core/utils/image_constant.dart';
-import '../../../theme/custom_text_style.dart';
-import '../../../theme/theme_helper.dart';
 import '../../../widgets/custom_icon_button.dart';
-import '../../../widgets/custom_image_view.dart';
 import '../../../widgets/custom_search_view.dart';
 import '../provider/homepage_provider.dart';
 
