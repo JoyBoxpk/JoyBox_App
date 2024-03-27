@@ -26,37 +26,36 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // final GoRouter _router = GoRouter(
-    //   debugLogDiagnostics: true,
-    //   initialLocation: HomeScreen.routeName,
-    //   routes: [
-    //     // GoRoute(
-    //     //   path: SplashScreen.routeName,
-    //     //   name: SplashScreen.routeName,
-    //     //   builder: (context, state) => SplashScreen(),
-    //     // ),
-    //     // GoRoute(
-    //     //     path: LoginScreen.routeName,
-    //     //     name: LoginScreen.routeName,
-    //     //     builder: (context,state) => LoginScreen(),
-    //     // ),
-    //     // GoRoute(
-    //     //   path: SignUpScreen.routeName,
-    //     //   name: SignUpScreen.routeName,
-    //     //   builder: (context,state) => SignUpScreen(),
-    //     // ),
-    //     // GoRoute(
-    //     //   path: GetStartedScreen.routeName,
-    //     //   name: GetStartedScreen.routeName,
-    //     //   builder: (context,state) => GetStartedScreen(),
-    //     // ),
-    //     GoRoute(
-    //       path: HomeScreen.routeName,
-    //       name: HomeScreen.routeName,
-    //       builder: (context,state) => HomeScreen(),
-    //     ),
-    //   ],
-    // );
+    final GoRouter _router = GoRouter(
+      debugLogDiagnostics: true,
+      routes: [
+        GoRoute(
+          path: SplashScreen.routeName,
+          name: SplashScreen.routeName,
+          builder: (context, state) => SplashScreen(),
+        ),
+        GoRoute(
+            path: LoginScreen.routeName,
+            name: LoginScreen.routeName,
+            builder: (context,state) => LoginScreen(),
+        ),
+        GoRoute(
+          path: SignUpScreen.routeName,
+          name: SignUpScreen.routeName,
+          builder: (context,state) => SignUpScreen(),
+        ),
+        GoRoute(
+          path: GetStartedScreen.routeName,
+          name: GetStartedScreen.routeName,
+          builder: (context,state) => GetStartedScreen(),
+        ),
+        GoRoute(
+          path: HomeScreen.routeName,
+          name: HomeScreen.routeName,
+          builder: (context,state) => HomeScreen(),
+        ),
+      ],
+    );
 
     return Sizer(
       builder: (context, orientation, deviceType) {
@@ -64,9 +63,8 @@ class MyApp extends StatelessWidget {
           create: (context) => ThemeProvider(),
           child: Consumer<ThemeProvider>(
             builder: (context, provider, child) {
-              return MaterialApp(
-                home: HomeScreen(),
-                // routerConfig: _router,
+              return MaterialApp.router(
+                routerConfig: _router,
                 theme: theme,
                 title: 'joybox',
                 // navigatorKey: NavigatorService.navigatorKey,
