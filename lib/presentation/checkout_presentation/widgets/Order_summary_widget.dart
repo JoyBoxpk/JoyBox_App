@@ -5,19 +5,24 @@ import 'package:joybox/theme/custom_text_style.dart';
 class OrderSummaryWidget extends StatelessWidget {
   const OrderSummaryWidget({
     Key? key,
-    required this.screenHeight,
+    required this.screenHeight, required this.bgcolor,required this.elevation, required this.Delivery_cintainercolor,
   }) : super(key: key);
 
   final double screenHeight;
+  final Color bgcolor,Delivery_cintainercolor;
+  final double elevation;
+  
 
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: bgcolor,
       shape: RoundedRectangleBorder(
+        
         borderRadius: BorderRadius.circular(10),
         side: const BorderSide(color: Colors.amberAccent, width: 1),
       ),
-      elevation: 10,
+      elevation: elevation,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -79,7 +84,7 @@ class OrderSummaryWidget extends StatelessWidget {
                           decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.circular(13),
-                              color: Color(0XFFFFD726)),
+                              color: Delivery_cintainercolor),
                           child: Text("Free"),
                         )
                       ],

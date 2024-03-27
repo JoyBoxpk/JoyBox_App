@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:joybox/core/app_export.dart';
 import 'package:joybox/presentation/checkout_presentation/widgets/Payment_details_widget.dart';
 import 'package:joybox/presentation/checkout_presentation/widgets/Progress_Indicator.dart';
@@ -44,7 +45,12 @@ class CheckoutScreen extends StatelessWidget {
                       isSelected: isSelected,
                       screenWidth: screenWidth),
                   SizedBox(height: screenHeight * 0.050),
-                  OrderSummaryWidget(screenHeight: screenHeight),
+                  OrderSummaryWidget(
+                    Delivery_cintainercolor: Color(0XFFFFD726),
+                    screenHeight: screenHeight,
+                    bgcolor: Colors.white,
+                    elevation: 10.0,
+                  ),
                   SizedBox(height: screenHeight * 0.016),
                   Container(
                     width: screenWidth * 0.7,
@@ -55,19 +61,253 @@ class CheckoutScreen extends StatelessWidget {
                 ],
               ),
             ),
-            TotalPayWidget(screenWidth: screenWidth, screenHeight: screenHeight),
+            TotalPayWidget(
+                screenWidth: screenWidth, screenHeight: screenHeight),
             Container(
-            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-            //margin: EdgeInsets.all(20),
-            width: screenWidth*0.70,
-            height: screenHeight * 0.080,
-            //decoration: BoxDecoration(color: Colors.amberAccent),
-            child: CustomElevatedButton(text: "Confirm checkout")
-          ),
-
-
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              //margin: EdgeInsets.all(20),
+              width: screenWidth * 0.70,
+              height: screenHeight * 0.080,
+              //decoration: BoxDecoration(color: Colors.amberAccent),
+              child: CustomElevatedButton(
+                onPressed: () =>
+                    showCustomDialogue(context), // Pass the context
+                text: 'Confirm Checkout',
+              ),
+            ),
           ],
         ),
+      ),
+    
+    );
+    
+  }
+}
+
+void showCustomDialogue(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AnimatedBuilder(
+        animation: Tween<double>(begin: 0.0, end: 1.0).animate(
+          CurvedAnimation(
+            parent: ModalRoute.of(context)!.animation!,
+            curve: Curves.bounceInOut,
+          ),
+        ),
+        builder: (context, child) {
+          return Opacity(
+            opacity: ModalRoute.of(context)!.animation!.value,
+            child: Dialog(
+              backgroundColor: Colors.transparent,
+              insetPadding: EdgeInsets.all(10),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                width: double.infinity,
+                height: MediaQuery.of(context).size.height * 0.7,
+                color: Color(0XFFFFD726),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.18,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              CustomImageView(
+                                width: 13,
+                                height: 10,
+                                fit: BoxFit.cover,
+                                imagePath: "assets/images/Vector_2.png",
+                              ),
+                              CustomImageView(
+                                width: 24,
+                                height: 10,
+                                fit: BoxFit.cover,
+                                imagePath: "assets/images/Group_38389.svg",
+                              )
+                            ],
+                          ),
+                          CustomImageView(
+                            imagePath:
+                                'assets/images/checkout_screen_alert_Vector.svg',
+                          )
+                        ],
+                      ),
+                    ),
+                    Text(
+                      "Thank you",
+                      style:
+                          TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+                    ),
+                    Icon(Icons.keyboard_arrow_down),
+                    OrderSummaryWidget(
+                      Delivery_cintainercolor: Colors.white,
+                      screenHeight: MediaQuery.of(context).size.height,
+                      bgcolor: Color(0XFFFFD726),
+                      elevation: 0.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        // CustomButton(
+                        //   txt: "Status",
+                        //   borderColor: Colors.red,
+                        //   bgColor: Colors.red,
+                        //   textColor: Colors.white,
+                        // ),
+                        CustomButtom(
+                          txt: "Status",
+                          Bordercolor: Colors.red,
+                          bgColor: Colors.red,
+                          Txtcolor: Colors.white,
+                        ),
+                        CustomButtom(
+                          txt: "Home",
+                          Bordercolor: Colors.black,
+                          bgColor: Colors.amberAccent,
+                          Txtcolor: Colors.black,
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      );
+    },
+  );
+}
+
+Drawer _buildDrawer(BuildContext context) {
+    return Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const UserAccountsDrawerHeader(
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: NetworkImage(
+                    'https://images.unsplash.com/photo-1485290334039-a3c69043e517?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyOTU3NDE0MQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=300'),
+              ),
+              accountEmail: Text('jane.doe@example.com'),
+              accountName: Text(
+                'Jane Doe',
+                style: TextStyle(fontSize: 24.0),
+              ),
+              decoration: BoxDecoration(
+                color: Colors.black87,
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.house),
+              title: const Text(
+                'Houses',
+                style: TextStyle(fontSize: 24.0),
+              ),
+              onTap: () {
+                // Navigator.pushReplacement(
+                //   context,
+                //   MaterialPageRoute<void>(
+                //     builder: (BuildContext context) => const MyHomePage(
+                //       title: 'Houses',
+                //     ),
+                //   ),
+                // );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.apartment),
+              title: const Text(
+                'Apartments',
+                style: TextStyle(fontSize: 24.0),
+              ),
+              onTap: () {
+                // Navigator.pushReplacement(
+                //   context,
+                //   MaterialPageRoute<void>(
+                //     builder: (BuildContext context) => const MyHomePage(
+                //       title: 'Apartments',
+                //     ),
+                //   ),
+                // );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.house_outlined),
+              title: const Text(
+                'Townhomes',
+                style: TextStyle(fontSize: 24.0),
+              ),
+              onTap: () {
+                // Navigator.pushReplacement(
+                //   context,
+                //   MaterialPageRoute<void>(
+                //     builder: (BuildContext context) => const MyHomePage(
+                //       title: 'Townhomes',
+                //     ),
+                //   ),
+                // );
+              },
+            ),
+            const Divider(
+              height: 10,
+              thickness: 1,
+            ),
+            ListTile(
+              leading: const Icon(Icons.favorite),
+              title: const Text(
+                'Favorites',
+                style: TextStyle(fontSize: 24.0),
+              ),
+              onTap: () {
+                // Navigator.pushReplacement(
+                //   context,
+                //   MaterialPageRoute<void>(
+                //     builder: (BuildContext context) => const MyHomePage(
+                //       title: 'Favorites',
+                //     ),
+                //   ),
+                // );
+              },
+            ),
+          ],
+        ),
+      );
+  }
+
+class CustomButtom extends StatelessWidget {
+  const CustomButtom({
+    Key? key,
+    required this.Txtcolor,
+    required this.Bordercolor,
+    required this.bgColor,
+    required this.txt,
+  }) : super(key: key);
+
+  final Color Txtcolor, Bordercolor, bgColor;
+  final String txt;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+      decoration: BoxDecoration(
+          border: Border.all(color: Bordercolor),
+          borderRadius: BorderRadius.all(Radius.circular(6)),
+          color: bgColor),
+      child: Text(
+        txt,
+        style: TextStyle(color: Txtcolor, fontSize: 10),
       ),
     );
   }
@@ -86,22 +326,19 @@ class TotalPayWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-    //margin: EdgeInsets.all(20),
-    width: screenWidth,
-    height: screenHeight * 0.080,
-    decoration: BoxDecoration(color: Colors.amberAccent),
-    child: Center(
-        child: Text(
-          
-      "Total Rs. 2.059",
-      maxLines: 3,
-      style: TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.bold,
-          color: Colors.black),
-    )),
-              );
+      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+      //margin: EdgeInsets.all(20),
+      width: screenWidth,
+      height: screenHeight * 0.080,
+      decoration: BoxDecoration(color: Colors.amberAccent),
+      child: Center(
+          child: Text(
+        "Total Rs. 2.059",
+        maxLines: 3,
+        style: TextStyle(
+            fontSize: 14, fontWeight: FontWeight.bold, color: Colors.black),
+      )),
+    );
   }
 }
 
