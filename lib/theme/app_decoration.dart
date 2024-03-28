@@ -55,12 +55,13 @@ class AppDecoration {
   
   // Outline decorations
   static BoxDecoration get outlineBlack => BoxDecoration(
+        borderRadius: BorderRadius.circular(15.0),
         color: appTheme.whiteA700,
         boxShadow: [
           BoxShadow(
             color: appTheme.black900.withOpacity(0.25),
-            spreadRadius: 2.h,
-            blurRadius: 2.h,
+            spreadRadius: 0.0,
+            blurRadius: 6,
             offset: Offset(
               0,
               4,

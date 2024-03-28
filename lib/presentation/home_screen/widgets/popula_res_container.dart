@@ -13,45 +13,51 @@ class populaResContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          height: 350.v,
-          child: Image.asset("assets/images/img2_home_screen.png"),
-        ),
-        Positioned(
-          left: 6,
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 5),
-            alignment: Alignment.centerLeft,
-            width: 110.h,
-            height: 30.v,
-            decoration: BoxDecoration(
-                color: Color(0xFFFFD726),
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(5.0),
-                  bottomRight: Radius.circular(5.0),
-                )),
-            child: Text(title),
-          ),
-        ),
-        Positioned(
-          bottom: -57,
-          left: 3,
-          child: Image.asset("assets/images/img3_home_screen.png",
-              width: 160, height: 160),
-        ),
-        Positioned(
-          right: 8,
-          child: IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.favorite_border_outlined,
-              color: Colors.white,
-              size: 20.0,
+        Stack(
+          children: [
+            Container(
+              height: 350.v,
+              child: Image.asset("assets/images/img2_home_screen.png"),
             ),
-          ),
+            Positioned(
+              left: 6,
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 5),
+                alignment: Alignment.centerLeft,
+                width: 110.h,
+                height: 35.v,
+                decoration: BoxDecoration(
+                    color: Color(0xFFFFD726),
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(5.0),
+                      bottomRight: Radius.circular(5.0),
+                    )),
+                child: Text(title, style: Theme.of(context).textTheme.labelLarge),
+              ),
+            ),
+            Positioned(
+              bottom: -57,
+              left: 3,
+              child: Image.asset("assets/images/img3_home_screen.png",
+                  width: 160, height: 160),
+            ),
+            Positioned(
+              right: 8,
+              child: IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.favorite_border_outlined,
+                  color: Colors.white,
+                  size: 20.0,
+                ),
+              ),
+            ),
+          ],
         ),
+        Text("Opening 11pm - 12am", style: Theme.of(context).textTheme.labelLarge),
       ],
     );
   }

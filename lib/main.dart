@@ -63,8 +63,9 @@ class MyApp extends StatelessWidget {
           create: (context) => ThemeProvider(),
           child: Consumer<ThemeProvider>(
             builder: (context, provider, child) {
-              return MaterialApp.router(
-                routerConfig: _router,
+              return MaterialApp(
+                // routerConfig: _router,
+                home: HomeScreen(),
                 theme: theme,
                 title: 'joybox',
                 // navigatorKey: NavigatorService.navigatorKey,
