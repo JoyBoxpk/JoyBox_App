@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:joybox/presentation/checkout_presentation/checkout_screen.dart';
-import 'package:joybox/presentation/login_screen/login_screen.dart';
-import 'package:joybox/presentation/signup_screen/signup_screen.dart';
 import 'core/app_export.dart';
 import 'presentation/drawer/drawer.dart';
 
@@ -48,7 +45,7 @@ class MyApp extends StatelessWidget {
                 ],
                 initialRoute: '/',
                 routes: {
-                  '/' : (context) => DrawerWidget(),
+                  '/' : (context) => DrwaerScreen(),
                 },
               );
             },
