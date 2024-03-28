@@ -12,7 +12,11 @@ import 'widgets/Order_summary_widget.dart';
 class CheckoutScreen extends StatelessWidget {
   CheckoutScreen({Key? key}) : super(key: key);
 
+
+  static const String routeName = "checkout-scren";
+
   final _controller = ValueNotifier<bool>(false);
+  
 
   @override
   Widget build(BuildContext context) {
